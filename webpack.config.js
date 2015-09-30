@@ -1,18 +1,13 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var merge = require('webpack-merge');
 
+var TARGET = process.env.npm_lifecycle_event;
 var ROOT_PATH = path.resolve(__dirname);
 
-module.exports = {
+var common = {
     entry: path.resolve(ROOT_PATH, 'app'),
-    devServer: {
-        historyApiFallback: true,
-        hot: true,
-        inline: true,
-        progress: true,
-        port: 4000,
-    },
     module: {
         loaders: [
             {
@@ -31,6 +26,21 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'Kanban App'
         }),
-        new webpack.HotModuleReplacementPlugin(),
     ]
 };
+
+if (TARGET === 'start' || !TARGET) {
+    module.exports = merge(common, {
+        devtool: 'eval-source-map',
+        plugins: [
+            new webpack.HotModuleReplacementPlugin(),
+        ],
+        devServer: {
+            historyApiFallback: true,
+            hot: true,
+            inline: true,
+            progress: true,
+            port: 4000,
+        },
+    });
+}
