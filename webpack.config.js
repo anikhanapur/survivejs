@@ -13,6 +13,16 @@ module.exports = {
         progress: true,
         port: 4000,
     },
+    module: {
+        loaders: [
+            {
+                test: /\.css$/,
+                // These apparently go right-to-left?
+                loaders: ['style', 'css'],
+                include: path.resolve(ROOT_PATH, 'app')
+            }
+        ]
+    },
     output: {
         path: path.resolve(ROOT_PATH, 'build'),
         filename: 'bundle.js',
