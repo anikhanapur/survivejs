@@ -11,6 +11,7 @@ module.exports = {
         hot: true,
         inline: true,
         progress: true,
+        port: 4000,
     },
     output: {
         path: path.resolve(ROOT_PATH, 'build'),
