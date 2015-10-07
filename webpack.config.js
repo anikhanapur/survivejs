@@ -5,6 +5,9 @@ var merge = require('webpack-merge');
 
 var TARGET = process.env.npm_lifecycle_event;
 var ROOT_PATH = path.resolve(__dirname);
+var BUILD_PATH = path.resolve(ROOT_PATH, 'build');
+
+process.env.BABEL_ENV = TARGET;
 
 var common = {
     entry: path.resolve(ROOT_PATH, 'app'),
