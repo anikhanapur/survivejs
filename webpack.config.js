@@ -18,6 +18,11 @@ var common = {
                 // These apparently go right-to-left?
                 loaders: ['style', 'css'],
                 include: path.resolve(ROOT_PATH, 'app')
+            },
+            {
+                test: /\.jsx?$/,
+                loaders: ['babel'],
+                include: path.resolve(ROOT_PATH, 'app')
             }
         ]
     },
@@ -37,13 +42,6 @@ if (TARGET === 'start' || !TARGET) {
         devtool: 'eval-source-map',
         plugins: [
             new webpack.HotModuleReplacementPlugin(),
-        ],
-        loaders: [
-            {
-                test: /\.jsx?$/,
-                loaders: ['babel'],
-                include: path.resolve(ROOT_PATH, 'app')
-            }
         ],
         devServer: {
             historyApiFallback: true,
