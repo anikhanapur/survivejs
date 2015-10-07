@@ -8,6 +8,9 @@ var ROOT_PATH = path.resolve(__dirname);
 
 var common = {
     entry: path.resolve(ROOT_PATH, 'app'),
+    resolve: {
+        extensions: ['', '.js', '.jsx'],
+    },
     module: {
         loaders: [
             {
@@ -34,6 +37,13 @@ if (TARGET === 'start' || !TARGET) {
         devtool: 'eval-source-map',
         plugins: [
             new webpack.HotModuleReplacementPlugin(),
+        ],
+        loaders: [
+            {
+                test: /\.jsx?$/,
+                loaders: ['babel'],
+                include: path.resolve(ROOT_PATH, 'app')
+            }
         ],
         devServer: {
             historyApiFallback: true,
